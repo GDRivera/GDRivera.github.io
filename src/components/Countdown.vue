@@ -29,7 +29,7 @@ const updateCountdown = () => {
   }, 500);
 };
 
-let interval: number;
+let interval: ReturnType<typeof setInterval>;
 
 onMounted(() => {
   updateCountdown();
