@@ -35,8 +35,4 @@ export default defineConfig({
         cors: true,
     },
     base: '/gdrivera.github.io/',
-    build: {
-      outDir: 'docs', // <-- Change output directory
-      assetsDir: '',  // <-- Ensures assets are correctly served
-  }
 })
