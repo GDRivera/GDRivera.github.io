@@ -76,8 +76,8 @@
             if (savedEndDate) {
                 return parseInt(savedEndDate);
             }
-            // If no saved date exists, set it to 90 days from April 1, 2024
-            const initialDate = new Date('2024-04-01T00:00:00').getTime();
+            // If no saved date exists, set it to 90 days from May 1, 2024
+            const initialDate = new Date('2024-05-01T00:00:00').getTime();
             localStorage.setItem('countdownEndDate', initialDate + (90 * 24 * 60 * 60 * 1000));
             return initialDate + (90 * 24 * 60 * 60 * 1000);
         };
