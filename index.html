@@ -70,8 +70,9 @@
     </div>
 
     <script>
-        // Set a specific end date (adjust this to your desired end date)
-        const endDate = new Date('2024-07-08T00:00:00').getTime(); // Example: 90 days from today
+        // Calculate end date (90 days from now)
+        const today = new Date();
+        const endDate = new Date(today.getTime() + (90 * 24 * 60 * 60 * 1000)).getTime();
         
         function updateCountdown() {
             const currentTime = new Date().getTime();
