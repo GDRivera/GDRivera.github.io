@@ -70,9 +70,19 @@
     </div>
 
     <script>
-        // Calculate end date (90 days from now)
-        const today = new Date();
-        const endDate = new Date(today.getTime() + (90 * 24 * 60 * 60 * 1000)).getTime();
+        // Get or set the end date from localStorage
+        const getEndDate = () => {
+            const savedEndDate = localStorage.getItem('countdownEndDate');
+            if (savedEndDate) {
+                return parseInt(savedEndDate);
+            }
+            // If no saved date exists, set it to 90 days from April 1, 2024
+            const initialDate = new Date('2024-04-01T00:00:00').getTime();
+            localStorage.setItem('countdownEndDate', initialDate + (90 * 24 * 60 * 60 * 1000));
+            return initialDate + (90 * 24 * 60 * 60 * 1000);
+        };
+
+        const endDate = getEndDate();
         
         function updateCountdown() {
             const currentTime = new Date().getTime();
@@ -80,6 +90,7 @@
 
             if (timeLeft <= 0) {
                 document.querySelector('.countdown-container').innerHTML = '<h1>Countdown Complete!</h1>';
+                localStorage.removeItem('countdownEndDate'); // Clear the stored end date
                 return;
             }
 
