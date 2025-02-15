@@ -34,5 +34,5 @@ export default defineConfig({
         open: true,
         cors: true,
     },
-    base: '/gdrivera.github.io/',
+    base: '/countdown/',
 })
