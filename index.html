@@ -3,68 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>90 Days Countdown</title>
+    <title>90 Days</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            background: linear-gradient(45deg, #2c3e50, #3498db);
-            color: white;
-        }
-
-        .countdown-container {
-            text-align: center;
+            background: #111;
+            color: #fff;
         }
 
         .countdown {
             display: flex;
             gap: 2rem;
-            margin-top: 2rem;
+            padding: 2rem;
         }
 
         .time-segment {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1rem;
-            border-radius: 10px;
-            min-width: 100px;
+            text-align: center;
+            position: relative;
         }
 
         .time-value {
-            font-size: 3rem;
-            font-weight: bold;
+            font-size: 5.5rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            gap: 0.1rem;
+        }
+
+        .time-value span {
+            position: relative;
+            width: 3.8rem;
+            height: 5.5rem;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .number {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        .number.old {
+            animation: slideUp 0.3s ease-in-out forwards;
+        }
+
+        .number.new {
+            animation: slideIn 0.3s ease-in-out forwards;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .time-label {
-            font-size: 1rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            margin-top: 0.5rem;
+            margin-top: 1rem;
+            letter-spacing: 3px;
+            opacity: 0.5;
+            font-weight: 400;
+        }
+
+        .time-segment::after {
+            content: ':';
+            position: absolute;
+            right: -1.2rem;
+            top: 50%;
+            transform: translateY(-55%);
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        .time-segment:last-child::after {
+            display: none;
+        }
+
+        /* Remove these properties if they exist */
+        .time-value span {
+            background: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .number {
+            background: none;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .countdown {
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .time-value {
+                font-size: 4rem;
+            }
+
+            .time-value span {
+                width: 2.8rem;
+                height: 4rem;
+            }
+
+            .time-segment::after {
+                right: -1rem;
+                font-size: 2.5rem;
+            }
+
+            .time-label {
+                font-size: 0.75rem;
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown {
+                gap: 0.8rem;
+                padding: 1rem;
+            }
+
+            .time-value {
+                font-size: 2.5rem;
+            }
+
+            .time-value span {
+                width: 1.8rem;
+                height: 2.5rem;
+            }
+
+            .time-segment::after {
+                right: -0.6rem;
+                font-size: 1.8rem;
+            }
+
+            .time-label {
+                font-size: 0.65rem;
+                letter-spacing: 1px;
+                margin-top: 0.5rem;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .countdown {
+                gap: 0.5rem;
+            }
+
+            .time-value {
+                font-size: 2rem;
+            }
+
+            .time-value span {
+                width: 1.5rem;
+                height: 2rem;
+            }
+
+            .time-segment::after {
+                right: -0.4rem;
+                font-size: 1.5rem;
+            }
+
+            .time-label {
+                font-size: 0.6rem;
+                letter-spacing: 0.5px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="countdown-container">
-        <h1>Countdown Timer</h1>
-        <div class="countdown">
-            <div class="time-segment">
-                <div class="time-value" id="days">90</div>
-                <div class="time-label">Days</div>
+    <div class="countdown">
+        <div class="time-segment">
+            <div class="time-value" id="days">
+                <span id="days-tens">9</span><span id="days-ones">0</span>
             </div>
-            <div class="time-segment">
-                <div class="time-value" id="hours">00</div>
-                <div class="time-label">Hours</div>
+        </div>
+        <div class="time-segment">
+            <div class="time-value" id="hours">
+                <span id="hours-tens">0</span><span id="hours-ones">0</span>
             </div>
-            <div class="time-segment">
-                <div class="time-value" id="minutes">00</div>
-                <div class="time-label">Minutes</div>
+        </div>
+        <div class="time-segment">
+            <div class="time-value" id="minutes">
+                <span id="minutes-tens">0</span><span id="minutes-ones">0</span>
             </div>
-            <div class="time-segment">
-                <div class="time-value" id="seconds">00</div>
-                <div class="time-label">Seconds</div>
+        </div>
+        <div class="time-segment">
+            <div class="time-value" id="seconds">
+                <span id="seconds-tens">0</span><span id="seconds-ones">0</span>
             </div>
         </div>
     </div>
@@ -90,8 +245,8 @@
             const timeLeft = endDate - currentTime;
 
             if (timeLeft <= 0) {
-                document.querySelector('.countdown-container').innerHTML = '<h1>Countdown Complete!</h1>';
-                localStorage.removeItem('countdownEndDate'); // Clear the stored end date
+                document.querySelector('.countdown').innerHTML = '<h1>Countdown Complete!</h1>';
+                localStorage.removeItem('countdownEndDate');
                 return;
             }
 
@@ -100,10 +255,35 @@
             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            updateDigit('days-tens', Math.floor(days / 10));
+            updateDigit('days-ones', days % 10);
+            updateDigit('hours-tens', Math.floor(hours / 10));
+            updateDigit('hours-ones', hours % 10);
+            updateDigit('minutes-tens', Math.floor(minutes / 10));
+            updateDigit('minutes-ones', minutes % 10);
+            updateDigit('seconds-tens', Math.floor(seconds / 10));
+            updateDigit('seconds-ones', seconds % 10);
+        }
+
+        function updateDigit(id, number) {
+            const element = document.getElementById(id);
+            const currentNumber = element.textContent;
+            const nextNumber = number.toString();
+            
+            if (currentNumber !== nextNumber) {
+                element.innerHTML = `
+                    <div class="number new">${nextNumber}</div>
+                    <div class="number old">${currentNumber}</div>
+                `;
+                
+                // Force a reflow
+                element.offsetHeight;
+                
+                // Clear the animation after it's done
+                setTimeout(() => {
+                    element.textContent = nextNumber;
+                }, 300);
+            }
         }
 
         // Update the countdown every second
