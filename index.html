@@ -16,6 +16,18 @@
             margin: 0;
             background: #111;
             color: #fff;
+            padding-top: 0;  /* Reset any existing padding */
+            margin-top: 0;   /* Reset any existing margin */
+        }
+
+        .content-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            position: relative;
         }
 
         .countdown {
@@ -190,6 +202,12 @@
                 width: 200px;
                 height: 200px;
             }
+
+            .quote {
+                font-size: 1.6rem;
+                letter-spacing: 1px;
+                transform: skew(-8deg);
+            }
         }
 
         @media (max-width: 350px) {
@@ -230,33 +248,155 @@
             height: 100%;
             object-fit: contain;
         }
+
+        .quote-container {
+            margin-top: 2rem;
+            width: 100%;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .quote-container.visible {
+            opacity: 1;
+        }
+
+        .quote {
+            font-family: 'DeterminationMono', monospace;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            font-style: italic;
+            transform: skew(-10deg);
+            display: inline-block;
+            position: relative;
+        }
+
+        .quote-text {
+            visibility: hidden;
+            white-space: nowrap;
+        }
+
+        .quote-animated {
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typewriter 2s steps(30, end) 1s forwards;
+            text-align: left;
+        }
+
+        .dot {
+            display: inline-block;
+            opacity: 0;
+            animation: appear 0.1s forwards 3s,
+                       pulse 1.5s ease-in-out infinite 3.1s;
+            position: absolute;
+            right: -0.5em;
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes appear {
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @font-face {
+            font-family: 'DeterminationMono';
+            src: url('https://cdn.jsdelivr.net/gh/photonstorm/phaser-examples@master/examples/assets/fonts/bitmap/determination_mono_web.ttf') format('truetype');
+        }
+
+        /* Dark Souls themed button */
+        .bonfire-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: #E2C285;
+            border: 1px solid #8E793E;
+            padding: 15px 30px;
+            font-family: 'Optimus Princeps', serif;
+            font-size: 18px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(226, 194, 133, 0.2);
+            z-index: 100;
+            text-transform: uppercase;
+        }
+        
+        .bonfire-button:hover {
+            background: rgba(20, 20, 20, 0.8);
+            box-shadow: 0 0 30px rgba(226, 194, 133, 0.4);
+            text-shadow: 0 0 5px rgba(226, 194, 133, 0.6);
+        }
+        
+        .bonfire-button:active {
+            transform: translate(-50%, -48%);
+        }
+        
+        /* Dark Souls font */
+        @font-face {
+            font-family: 'Optimus Princeps';
+            src: url('https://db.onlinewebfonts.com/t/b2e75c336df191233b3096682c9ee6be.eot');
+            src: url('https://db.onlinewebfonts.com/t/b2e75c336df191233b3096682c9ee6be.eot?#iefix') format('embedded-opentype'),
+                 url('https://db.onlinewebfonts.com/t/b2e75c336df191233b3096682c9ee6be.woff2') format('woff2'),
+                 url('https://db.onlinewebfonts.com/t/b2e75c336df191233b3096682c9ee6be.woff') format('woff'),
+                 url('https://db.onlinewebfonts.com/t/b2e75c336df191233b3096682c9ee6be.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
     </style>
+    <script src="typing-sound.js"></script>
 </head>
 <body>
-    <div class="bonfire-container">
-        <img src="darksoulsbonfire.gif" alt="Dark Souls Bonfire">
-    </div>
-    <div class="countdown">
-        <div class="time-segment">
-            <div class="time-value" id="days">
-                <span id="days-tens">9</span><span id="days-ones">0</span>
+    <div class="content-wrapper">
+        <div class="bonfire-container">
+            <img src="darksoulsbonfire.gif" alt="Dark Souls Bonfire">
+        </div>
+        <div class="countdown">
+            <div class="time-segment">
+                <div class="time-value" id="days">
+                    <span id="days-tens">9</span><span id="days-ones">0</span>
+                </div>
+            </div>
+            <div class="time-segment">
+                <div class="time-value" id="hours">
+                    <span id="hours-tens">0</span><span id="hours-ones">0</span>
+                </div>
+            </div>
+            <div class="time-segment">
+                <div class="time-value" id="minutes">
+                    <span id="minutes-tens">0</span><span id="minutes-ones">0</span>
+                </div>
+            </div>
+            <div class="time-segment">
+                <div class="time-value" id="seconds">
+                    <span id="seconds-tens">0</span><span id="seconds-ones">0</span>
+                </div>
             </div>
         </div>
-        <div class="time-segment">
-            <div class="time-value" id="hours">
-                <span id="hours-tens">0</span><span id="hours-ones">0</span>
+        <div class="quote-container">
+            <div class="quote">
+                <span class="quote-text">You are filled with determination</span>
+                <span class="quote-animated">You are filled with determination</span>
+                <span class="dot">.</span>
             </div>
         </div>
-        <div class="time-segment">
-            <div class="time-value" id="minutes">
-                <span id="minutes-tens">0</span><span id="minutes-ones">0</span>
-            </div>
-        </div>
-        <div class="time-segment">
-            <div class="time-value" id="seconds">
-                <span id="seconds-tens">0</span><span id="seconds-ones">0</span>
-            </div>
-        </div>
+        
+        <!-- Dark Souls themed button -->
+        <button id="bonfireButton" class="bonfire-button">Click to rest at bonfire...</button>
     </div>
 
     <script>
@@ -318,6 +458,96 @@
         // Update the countdown every second
         setInterval(updateCountdown, 1000);
         updateCountdown();
+        
+        // Audio and animation handling
+        document.addEventListener('DOMContentLoaded', function() {
+            let soundSystem;
+            let audioInitialized = false;
+            let typingSequence;
+            
+            // Get DOM elements
+            const bonfireButton = document.getElementById('bonfireButton');
+            const quoteContainer = document.querySelector('.quote-container');
+            
+            // Function to initialize audio with user interaction
+            function initializeAudio() {
+                if (audioInitialized) return;
+                
+                console.log("Initializing audio system...");
+                
+                // Create our sound system
+                soundSystem = createTypingSoundSystem();
+                
+                // Force audio context to resume
+                if (soundSystem.audioCtx) {
+                    soundSystem.audioCtx.resume().then(() => {
+                        console.log("AudioContext resumed successfully");
+                    }).catch(e => {
+                        console.error("Failed to resume AudioContext:", e);
+                    });
+                }
+                
+                // Hide the button immediately
+                bonfireButton.style.display = 'none';
+                
+                // Show the quote container immediately
+                quoteContainer.classList.add('visible');
+                
+                // Start the animation immediately
+                startTypingAnimation();
+                
+                audioInitialized = true;
+            }
+            
+            // Function to start typing animation with sound
+            function startTypingAnimation() {
+                console.log("Starting typing animation with sound");
+                
+                // Reset the animation
+                const quoteAnimated = document.querySelector('.quote-animated');
+                const dot = document.querySelector('.dot');
+                
+                if (!quoteAnimated || !dot) return;
+                
+                // Reset animations by removing and re-adding the elements
+                const quoteParent = quoteAnimated.parentNode;
+                const quoteText = quoteAnimated.textContent;
+                const dotText = dot.textContent;
+                
+                quoteParent.removeChild(quoteAnimated);
+                quoteParent.removeChild(dot);
+                
+                // Force reflow
+                void quoteParent.offsetWidth;
+                
+                // Create new elements
+                const newQuoteAnimated = document.createElement('span');
+                newQuoteAnimated.className = 'quote-animated';
+                newQuoteAnimated.textContent = quoteText;
+                
+                const newDot = document.createElement('span');
+                newDot.className = 'dot';
+                newDot.textContent = dotText;
+                
+                quoteParent.appendChild(newQuoteAnimated);
+                quoteParent.appendChild(newDot);
+                
+                // Start playing sounds with a slight delay to match animation
+                setTimeout(() => {
+                    if (soundSystem) {
+                        typingSequence = soundSystem.playTypingSequence({
+                            duration: 2000,
+                            onComplete: function() {
+                                console.log("Typing sequence complete");
+                            }
+                        });
+                    }
+                }, 1000); // Keep the same delay
+            }
+            
+            // Add click event to the button
+            bonfireButton.addEventListener('click', initializeAudio);
+        });
     </script>
 </body>
 </html>
