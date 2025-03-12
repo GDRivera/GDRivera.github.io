@@ -35,6 +35,8 @@
             display: flex;
             justify-content: center;
             gap: 0.1rem;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            animation: glow 3s ease-in-out infinite;
         }
 
         .time-value span {
@@ -85,6 +87,11 @@
                 transform: translateY(0);
                 opacity: 1;
             }
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+            50% { text-shadow: 0 0 30px rgba(255, 255, 255, 0.2); }
         }
 
         .time-label {
@@ -215,6 +222,7 @@
             margin-bottom: 2rem;
             width: 400px;
             height: 400px;
+            filter: drop-shadow(0 0 15px rgba(255, 147, 41, 0.2));
         }
 
         .bonfire-container img {
@@ -254,7 +262,7 @@
     <script>
         // Set a fixed end date - 90 days from February 15, 2024
         const getEndDate = () => {
-            const startDate = new Date('2025-03-03').getTime();
+            const startDate = new Date('2025-03-11').getTime();
             const endDate = startDate + (90 * 24 * 60 * 60 * 1000);
             return endDate;
         };
