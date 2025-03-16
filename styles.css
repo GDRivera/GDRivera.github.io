@@ -20,6 +20,8 @@ body {
     justify-content: center;
     gap: 1rem;
     position: relative;
+    padding-bottom: 250px;
+    margin-top: -50px;
 }
 
 .countdown {
@@ -187,7 +189,6 @@ body {
     .time-label {
         font-size: 0.65rem;
         letter-spacing: 1px;
-        margin-top: 0.5rem;
     }
 
     .bonfire-container {
@@ -232,6 +233,8 @@ body {
     width: 400px;
     height: 400px;
     filter: drop-shadow(0 0 15px rgba(255, 147, 41, 0.2));
+    margin-bottom: -20px;
+    position: relative; /* Added for absolute positioning context */
 }
 
 .bonfire-container img {
@@ -245,6 +248,9 @@ body {
     text-align: center;
     opacity: 0;
     transition: opacity 1s ease;
+    margin-bottom: 5rem; /* Increased margin to push logs down */
+    position: relative;
+    z-index: 1100;
 }
 
 .quote-container.visible {
@@ -307,11 +313,20 @@ body {
 }
 
 /* Dark Souls themed button */
+.bonfire-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .bonfire-button {
     position: absolute;
-    top: 55%;
+    bottom: 20px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
+    width: 80%; /* Added width to match most of the image width */
     background: rgba(0, 0, 0, 0.7);
     color: #E2C285;
     border: 1px solid #8E793E;
@@ -322,18 +337,15 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 0 20px rgba(226, 194, 133, 0.2);
-    z-index: 100;
     text-transform: uppercase;
+    z-index: 1;
+    white-space: nowrap; /* Prevent text from wrapping */
 }
 
 .bonfire-button:hover {
     background: rgba(20, 20, 20, 0.8);
     box-shadow: 0 0 30px rgba(226, 194, 133, 0.4);
     text-shadow: 0 0 5px rgba(226, 194, 133, 0.6);
-}
-
-.bonfire-button:active {
-    transform: translate(-50%, -48%);
 }
 
 /* Dark Souls font */
@@ -367,5 +379,178 @@ body {
     .quote {
         font-size: 0.8rem;  /* Even smaller font size for very small screens */
         letter-spacing: 0.8px;  /* Adjust letter-spacing to fit better */
+    }
+}
+/* Add these styles at the end of your CSS file */
+.logs-container {
+    position: relative; /* Changed from fixed to relative */
+    width: 90%;
+    max-width: 400px;
+    max-height: 200px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #8E793E;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: 'DeterminationMono', monospace;
+    color: #E2C285;
+    font-size: 0.9rem;
+    z-index: 1000;
+    /* Remove bottom and transform properties since we're not fixed anymore */
+}
+
+.log-entry {
+    margin: 5px 0;
+    padding: 5px;
+    border-bottom: 1px solid rgba(142, 121, 62, 0.3);
+    word-wrap: break-word; /* Allow long words to break */
+    white-space: normal; /* Allow text to wrap */
+}
+
+.log-date {
+    color: #8E793E;
+    margin-right: 8px;
+    font-size: 0.8rem;
+}
+
+.log-message {
+    color: #E2C285;
+    display: inline-block; /* Makes the text wrap properly */
+    word-break: break-word; /* Breaks long words if necessary */
+    max-width: 100%; /* Ensures text stays within container */
+}
+
+/* Responsive styles for logs */
+@media (max-width: 768px) {
+    .logs-container {
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logs-container {
+        max-height: 150px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 350px) {
+    .logs-container {
+        max-height: 120px;
+        width: 95%;
+        padding: 8px;
+    }
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .quote-container {
+        margin-bottom: 3rem; /* Slightly less margin for tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .quote-container {
+        margin-bottom: 3rem; /* Less margin for mobile */
+    }
+}
+
+@media (max-width: 350px) {
+    .quote-container {
+        margin-bottom: 3rem; /* Even less margin for very small screens */
+    }
+}
+/* Adjust responsive styles */
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding-bottom: 200px;
+        margin-top: -30px;
+    }
+
+    .bonfire-container {
+        width: 300px;
+        height: 300px;
+        margin-bottom: -15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-wrapper {
+        padding-bottom: 180px;
+        margin-top: -20px;
+    }
+
+    .bonfire-container {
+        width: 200px;
+        height: 200px;
+        margin-bottom: -10px;
+    }
+}
+
+@media (max-width: 350px) {
+    .content-wrapper {
+        padding-bottom: 150px;
+        margin-top: -15px;
+    }
+}
+/* Adjust responsive styles */
+@media (max-width: 768px) {
+    .bonfire-button {
+        font-size: 16px;
+        padding: 12px 25px;
+        bottom: 15px; /* Adjusted for tablet */
+        width: 85%; /* Slightly wider on tablets for better proportion */
+    }
+}
+
+@media (max-width: 480px) {
+    .bonfire-button {
+        font-size: 14px;
+        padding: 10px 20px;
+        bottom: 10px; /* Adjusted for mobile */
+        width: 90%; /* Even wider on mobile for better proportion */
+    }
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .bonfire-container {
+        width: 350px; /* Increased from 300px */
+        height: 350px;
+        margin-bottom: -15px;
+    }
+
+    .bonfire-button {
+        font-size: 16px;
+        padding: 12px 25px;
+        bottom: 15px;
+        width: 85%;
+    }
+}
+
+@media (max-width: 480px) {
+    .bonfire-container {
+        width: 300px; /* Increased from 200px */
+        height: 300px;
+        margin-bottom: -10px;
+    }
+
+    .bonfire-button {
+        font-size: 14px;
+        padding: 10px 20px;
+        bottom: 10px;
+        width: 90%;
+    }
+}
+
+@media (max-width: 350px) {
+    .bonfire-container {
+        width: 280px;
+        height: 280px;
+    }
+
+    .bonfire-button {
+        font-size: 12px;
+        padding: 8px 15px;
+        letter-spacing: 1px;
+        width: 90%;
     }
 }

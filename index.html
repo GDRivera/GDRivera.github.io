@@ -10,8 +10,12 @@
 </head>
 <body>
     <div class="content-wrapper">
-        <div class="bonfire-container">
-            <img src="darksoulsbonfire.gif" alt="Dark Souls Bonfire">
+        <div class="bonfire-section">
+            <div class="bonfire-container">
+                <img src="darksoulsbonfire.gif" alt="Dark Souls Bonfire">
+            </div>
+            <!-- Moved button here, under the bonfire image -->
+            <button id="bonfireButton" class="bonfire-button">Click to rest at bonfire...</button>
         </div>
         <div class="countdown">
             <div class="time-segment">
@@ -42,9 +46,9 @@
                 <span class="dot">.</span>
             </div>
         </div>
-        
-        <!-- Dark Souls themed button -->
-        <button id="bonfireButton" class="bonfire-button">Click to rest at bonfire...</button>
+        <div class="logs-container" id="logsContainer">
+            <!-- Logs will be inserted here -->
+        </div>
     </div>
 </body>
 <script src="main.js"></script>

@@ -1,4 +1,31 @@
 
+const logs = [
+    { date: '2025-03-16', message: 'This is a test log for today.' },
+    // Add more logs as needed
+];
+
+function displayLogs() {
+    const logsContainer = document.getElementById('logsContainer');
+    
+    logs.forEach(log => {
+        const logEntry = document.createElement('div');
+        logEntry.className = 'log-entry';
+        
+        const date = new Date(log.date);
+        const formattedDate = date.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric'
+        });
+        
+        logEntry.innerHTML = `
+            <span class="log-date">${formattedDate}</span>
+            <span class="log-message">${log.message}</span>
+        `;
+        
+        logsContainer.appendChild(logEntry);
+    });
+}
+
 // Set a fixed end date - 90 days from February 15, 2024
 const getEndDate = () => {
     const startDate = new Date('2025-03-16').getTime();
@@ -146,4 +173,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add click event to the button
     bonfireButton.addEventListener('click', initializeAudio);
+    
+    // Initialize logs
+    displayLogs();
 });
