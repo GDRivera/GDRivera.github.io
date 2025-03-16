@@ -1,0 +1,373 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background: #111;
+    color: #fff;
+    padding-top: 0;  /* Reset any existing padding */
+    margin-top: 0;   /* Reset any existing margin */
+}
+
+.content-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    position: relative;
+}
+
+.countdown {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.time-segment {
+    text-align: center;
+    position: relative;
+}
+
+.time-value {
+    font-size: 5.5rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    gap: 0.1rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    animation: glow 3s ease-in-out infinite;
+}
+
+.time-value span {
+    position: relative;
+    width: 3.8rem;
+    height: 5.5rem;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.number.old {
+    animation: slideUp 0.3s ease-in-out forwards;
+}
+
+.number.new {
+    animation: slideIn 0.3s ease-in-out forwards;
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+    50% { text-shadow: 0 0 30px rgba(255, 255, 255, 0.2); }
+}
+
+.time-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    margin-top: 1rem;
+    letter-spacing: 3px;
+    opacity: 0.5;
+    font-weight: 400;
+}
+
+.time-segment::after {
+    content: ':';
+    position: absolute;
+    right: -1.2rem;
+    top: 50%;
+    transform: translateY(-55%);
+    font-size: 3rem;
+    opacity: 0.3;
+}
+
+.time-segment:last-child::after {
+    display: none;
+}
+
+/* Remove these properties if they exist */
+.time-value span {
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.number {
+    background: none;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .countdown {
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .time-value {
+        font-size: 4rem;
+    }
+
+    .time-value span {
+        width: 2.8rem;
+        height: 4rem;
+    }
+
+    .time-segment::after {
+        right: -1rem;
+        font-size: 2.5rem;
+    }
+
+    .time-label {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+    }
+
+    .bonfire-container {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown {
+        gap: 0.8rem;
+        padding: 1rem;
+    }
+
+    .time-value {
+        font-size: 2.5rem;
+    }
+
+    .time-value span {
+        width: 1.8rem;
+        height: 2.5rem;
+    }
+
+    .time-segment::after {
+        right: -0.6rem;
+        font-size: 1.8rem;
+    }
+
+    .time-label {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+        margin-top: 0.5rem;
+    }
+
+    .bonfire-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    .quote {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+        transform: skew(-8deg);
+    }
+}
+
+@media (max-width: 350px) {
+    .countdown {
+        gap: 0.5rem;
+    }
+
+    .time-value {
+        font-size: 2rem;
+    }
+
+    .time-value span {
+        width: 1.5rem;
+        height: 2rem;
+    }
+
+    .time-segment::after {
+        right: -0.4rem;
+        font-size: 1.5rem;
+    }
+
+    .time-label {
+        font-size: 0.6rem;
+        letter-spacing: 0.5px;
+    }
+}
+
+/* Add these new styles */
+.bonfire-container {
+    margin-bottom: 2rem;
+    width: 400px;
+    height: 400px;
+    filter: drop-shadow(0 0 15px rgba(255, 147, 41, 0.2));
+}
+
+.bonfire-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.quote-container {
+    margin-top: 2rem;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.quote-container.visible {
+    opacity: 1;
+}
+
+.quote {
+    font-family: 'DeterminationMono', monospace;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    opacity: 0.9;
+    font-style: italic;
+    transform: skew(-10deg);
+    display: inline-block;
+    position: relative;
+}
+
+.quote-text {
+    visibility: hidden;
+    white-space: nowrap;
+}
+
+.quote-animated {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typewriter 2s steps(30, end) 1s forwards;
+    text-align: left;
+}
+
+.dot {
+    display: inline-block;
+    opacity: 0;
+    animation: appear 0.1s forwards 3s,
+               pulse 1.5s ease-in-out infinite 3.1s;
+    position: absolute;
+    right: -0.5em;
+}
+
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes appear {
+    to { opacity: 1; }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+@font-face {
+    font-family: 'DeterminationMono';
+    src: url('https://cdn.jsdelivr.net/gh/photonstorm/phaser-examples@master/examples/assets/fonts/bitmap/determination_mono_web.ttf') format('truetype');
+}
+
+/* Dark Souls themed button */
+.bonfire-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: #E2C285;
+    border: 1px solid #8E793E;
+    padding: 15px 30px;
+    font-family: 'Optimus Princeps', serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(226, 194, 133, 0.2);
+    z-index: 100;
+    text-transform: uppercase;
+}
+
+.bonfire-button:hover {
+    background: rgba(20, 20, 20, 0.8);
+    box-shadow: 0 0 30px rgba(226, 194, 133, 0.4);
+    text-shadow: 0 0 5px rgba(226, 194, 133, 0.6);
+}
+
+.bonfire-button:active {
+    transform: translate(-50%, -48%);
+}
+
+/* Dark Souls font */
+@font-face {
+    font-family: 'Optimus Princeps';
+    src: url('https://db.onlinewebfonts.com/t/b2e75c336df191233b3096682c9ee6be.eot');
+    src: url('https://db.onlinewebfonts.com/t/b2e75c336df191233b3096682c9ee6be.eot?#iefix') format('embedded-opentype'),
+         url('https://db.onlinewebfonts.com/t/b2e75c336df191233b3096682c9ee6be.woff2') format('woff2'),
+         url('https://db.onlinewebfonts.com/t/b2e75c336df191233b3096682c9ee6be.woff') format('woff'),
+         url('https://db.onlinewebfonts.com/t/b2e75c336df191233b3096682c9ee6be.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Apply responsive font sizes and adjustments for smaller screens */
+@media (max-width: 768px) {
+    .quote {
+        font-size: 1.2rem;  /* Smaller font size for tablets */
+        letter-spacing: 1.5px;  /* Adjust letter-spacing */
+    }
+}
+
+@media (max-width: 480px) {
+    .quote {
+        font-size: 1.0rem;  /* Smaller font size for mobile devices */
+        letter-spacing: 1px;  /* Further adjust letter-spacing */
+    }
+}
+
+@media (max-width: 350px) {
+    .quote {
+        font-size: 0.8rem;  /* Even smaller font size for very small screens */
+        letter-spacing: 0.8px;  /* Adjust letter-spacing to fit better */
+    }
+}
