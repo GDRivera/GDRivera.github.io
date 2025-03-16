@@ -242,7 +242,6 @@ body {
 }
 
 .quote-container {
-    margin-top: 2rem;
     width: 100%;
     text-align: center;
     opacity: 0;
@@ -311,7 +310,7 @@ body {
 /* Dark Souls themed button */
 .bonfire-button {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
     background: rgba(0, 0, 0, 0.7);
