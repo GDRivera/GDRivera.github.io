@@ -18,7 +18,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
     position: relative;
 }
 
@@ -229,7 +229,6 @@ body {
 
 /* Add these new styles */
 .bonfire-container {
-    margin-bottom: 2rem;
     width: 400px;
     height: 400px;
     filter: drop-shadow(0 0 15px rgba(255, 147, 41, 0.2));
