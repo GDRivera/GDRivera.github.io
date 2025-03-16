@@ -1,30 +1,91 @@
 
 const logs = [
     { date: '2025-03-16', message: 'This is a test log for today.' },
+    { date: '2025-03-16', message: 'This is a test log for today.' },
+    { date: '2025-03-16', message: 'This is a test log for today.' },
     // Add more logs as needed
 ];
 
 function displayLogs() {
     const logsContainer = document.getElementById('logsContainer');
+    logsContainer.innerHTML = ''; // Clear existing logs
     
+    // Group logs by month and year
+    const groupedLogs = {};
     logs.forEach(log => {
-        const logEntry = document.createElement('div');
-        logEntry.className = 'log-entry';
-        
-        // Create date with explicit time to avoid timezone issues
         const date = new Date(log.date + 'T12:00:00');
-        const formattedDate = date.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            timeZone: 'UTC'  // Use UTC to avoid timezone shifts
+        const monthYear = date.toLocaleDateString('en-US', {
+            month: 'long',
+            year: 'numeric',
+            timeZone: 'UTC'
         });
         
-        logEntry.innerHTML = `
-            <span class="log-date">${formattedDate}</span>
-            <span class="log-message">${log.message}</span>
+        if (!groupedLogs[monthYear]) {
+            groupedLogs[monthYear] = [];
+        }
+        groupedLogs[monthYear].push(log);
+    });
+    
+    // Sort groups by date (newest first)
+    const sortedMonths = Object.keys(groupedLogs).sort((a, b) => {
+        const dateA = new Date(a);
+        const dateB = new Date(b);
+        return dateB - dateA;
+    });
+    
+    // Create and append groups
+    sortedMonths.forEach((monthYear, index) => {
+        // Create month group container
+        const monthGroup = document.createElement('div');
+        monthGroup.className = 'log-month-group';
+        
+        // Create header container
+        const monthHeaderContainer = document.createElement('div');
+        monthHeaderContainer.className = 'log-month-header';
+        
+        // Add dropdown arrow and month text
+        monthHeaderContainer.innerHTML = `
+            <span class="dropdown-arrow">▼</span>
+            <span class="month-text">${monthYear}</span>
         `;
         
-        logsContainer.appendChild(logEntry);
+        // Create logs container
+        const logsWrapper = document.createElement('div');
+        logsWrapper.className = 'logs-wrapper';
+        // Show first month by default, hide others
+        if (index !== 0) {
+            logsWrapper.classList.add('collapsed');
+            monthHeaderContainer.classList.add('collapsed');
+        }
+        
+        // Add logs for this month
+        groupedLogs[monthYear].forEach(log => {
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            
+            const date = new Date(log.date + 'T12:00:00');
+            const formattedDate = date.toLocaleDateString('en-US', {
+                day: 'numeric',
+                timeZone: 'UTC'
+            });
+            
+            logEntry.innerHTML = `
+                <span class="log-date">${formattedDate}</span>
+                <span class="log-message">${log.message}</span>
+            `;
+            
+            logsWrapper.appendChild(logEntry);
+        });
+        
+        // Add click handler to header
+        monthHeaderContainer.addEventListener('click', () => {
+            logsWrapper.classList.toggle('collapsed');
+            monthHeaderContainer.classList.toggle('collapsed');
+        });
+        
+        monthGroup.appendChild(monthHeaderContainer);
+        monthGroup.appendChild(logsWrapper);
+        logsContainer.appendChild(monthGroup);
     });
 }
 

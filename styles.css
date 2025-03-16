@@ -386,7 +386,7 @@ body {
     position: relative; /* Changed from fixed to relative */
     width: 90%;
     max-width: 400px;
-    max-height: 200px;
+    max-height: 300px;
     overflow-y: auto;
     background: rgba(0, 0, 0, 0.8);
     border: 1px solid #8E793E;
@@ -396,15 +396,126 @@ body {
     color: #E2C285;
     font-size: 0.9rem;
     z-index: 1000;
-    /* Remove bottom and transform properties since we're not fixed anymore */
+    scrollbar-width: thin;
+    scrollbar-color: #8E793E rgba(0, 0, 0, 0.3);
+}
+
+.logs-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.logs-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.logs-container::-webkit-scrollbar-thumb {
+    background-color: #8E793E;
+    border-radius: 4px;
+}
+
+.log-month-group {
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(142, 121, 62, 0.3);
+    padding-bottom: 10px;
+}
+
+.log-month-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.log-month-header {
+    color: #C17B3E;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #8E793E;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(193, 123, 62, 0.3);
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.2s ease-out;
+    will-change: transform;
+}
+
+.log-month-header:hover {
+    color: #E2C285;
+}
+
+.dropdown-arrow {
+    display: inline-block;
+    transition: transform 0.2s ease-out;
+    font-size: 0.8em;
+    color: #8E793E;
+    will-change: transform;
+}
+
+.log-month-header.collapsed .dropdown-arrow {
+    transform: rotate(-90deg);
+}
+
+.logs-wrapper {
+    height: auto;
+    opacity: 1;
+    transform-origin: top;
+    transform: scaleY(1);
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    will-change: transform, opacity;
+}
+
+.logs-wrapper.collapsed {
+    height: 0;
+    opacity: 0;
+    transform: scaleY(0);
+    margin: 0;
+    padding: 0;
+}
+
+.log-month-header.collapsed {
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(142, 121, 62, 0.3);
+}
+
+/* Hover effect for the header */
+.log-month-header:hover .dropdown-arrow {
+    color: #E2C285;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .log-month-header {
+        font-size: 1rem;
+    }
+    
+    .dropdown-arrow {
+        font-size: 0.7em;
+    }
+}
+
+@media (max-width: 480px) {
+    .log-month-header {
+        font-size: 0.9rem;
+    }
+    
+    .dropdown-arrow {
+        font-size: 0.6em;
+    }
 }
 
 .log-entry {
     margin: 5px 0;
     padding: 5px;
-    border-bottom: 1px solid rgba(142, 121, 62, 0.3);
-    word-wrap: break-word; /* Allow long words to break */
-    white-space: normal; /* Allow text to wrap */
+    word-wrap: break-word;
+    white-space: normal;
+    transition: background-color 0.2s ease;
+}
+
+.log-entry:hover {
+    background: rgba(142, 121, 62, 0.1);
 }
 
 .log-date {
@@ -424,21 +535,41 @@ body {
 @media (max-width: 768px) {
     .logs-container {
         max-width: 350px;
+        font-size: 0.85rem;
+    }
+    
+    .log-month-header {
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 480px) {
     .logs-container {
-        max-height: 150px;
+        max-width: 300px;
+        max-height: 250px;
         padding: 10px;
+        font-size: 0.8rem;
+    }
+    
+    .log-month-header {
+        font-size: 0.9rem;
+    }
+    
+    .log-date {
+        font-size: 0.75rem;
     }
 }
 
 @media (max-width: 350px) {
     .logs-container {
-        max-height: 120px;
-        width: 95%;
+        max-width: 280px;
+        max-height: 200px;
         padding: 8px;
+    }
+    
+    .log-month-group {
+        margin-bottom: 10px;
+        padding-bottom: 8px;
     }
 }
 /* Responsive adjustments */
