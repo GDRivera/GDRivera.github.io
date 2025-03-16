@@ -11,10 +11,12 @@ function displayLogs() {
         const logEntry = document.createElement('div');
         logEntry.className = 'log-entry';
         
-        const date = new Date(log.date);
+        // Create date with explicit time to avoid timezone issues
+        const date = new Date(log.date + 'T12:00:00');
         const formattedDate = date.toLocaleDateString('en-US', {
             month: 'short',
-            day: 'numeric'
+            day: 'numeric',
+            timeZone: 'UTC'  // Use UTC to avoid timezone shifts
         });
         
         logEntry.innerHTML = `
