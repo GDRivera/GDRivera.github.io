@@ -7,7 +7,7 @@ const logs = [
 ];
 
 function displayLogs() {
-    const logsContainer = document.getElementById('logsContainer');
+    const logsContainer = document.querySelector('.logs-container');
     logsContainer.innerHTML = ''; // Clear existing logs
     
     // Group logs by month and year
@@ -35,28 +35,21 @@ function displayLogs() {
     
     // Create and append groups
     sortedMonths.forEach((monthYear, index) => {
-        // Create month group container
         const monthGroup = document.createElement('div');
         monthGroup.className = 'log-month-group';
         
-        // Create header container
-        const monthHeaderContainer = document.createElement('div');
-        monthHeaderContainer.className = 'log-month-header';
-        
-        // Add dropdown arrow and month text
-        monthHeaderContainer.innerHTML = `
+        const monthHeader = document.createElement('div');
+        monthHeader.className = 'log-month-header';
+        monthHeader.innerHTML = `
             <span class="dropdown-arrow">▼</span>
-            <span class="month-text">${monthYear}</span>
+            ${monthYear}
         `;
         
-        // Create logs container
         const logsWrapper = document.createElement('div');
         logsWrapper.className = 'logs-wrapper';
-        // Show first month by default, hide others
-        if (index !== 0) {
-            logsWrapper.classList.add('collapsed');
-            monthHeaderContainer.classList.add('collapsed');
-        }
+        
+        const logsContent = document.createElement('div');
+        logsContent.className = 'logs-content';
         
         // Add logs for this month
         groupedLogs[monthYear].forEach(log => {
@@ -74,19 +67,53 @@ function displayLogs() {
                 <span class="log-message">${log.message}</span>
             `;
             
-            logsWrapper.appendChild(logEntry);
+            logsContent.appendChild(logEntry);
         });
         
-        // Add click handler to header
-        monthHeaderContainer.addEventListener('click', () => {
-            logsWrapper.classList.toggle('collapsed');
-            monthHeaderContainer.classList.toggle('collapsed');
-        });
+        // Collapse all except first month
+        if (index !== 0) {
+            logsWrapper.classList.add('collapsed');
+            monthHeader.classList.add('collapsed');
+        }
         
-        monthGroup.appendChild(monthHeaderContainer);
+        logsWrapper.appendChild(logsContent);
+        monthGroup.appendChild(monthHeader);
         monthGroup.appendChild(logsWrapper);
         logsContainer.appendChild(monthGroup);
+        
+        // Add click handler
+        monthHeader.addEventListener('click', () => {
+            toggleLogs(monthHeader, logsWrapper);
+        });
+        
+        // Set initial height for expanded items
+        if (index === 0) {
+            logsWrapper.style.height = logsContent.offsetHeight + 'px';
+        }
     });
+}
+
+function toggleLogs(monthHeaderContainer, logsWrapper) {
+    const isCollapsed = logsWrapper.classList.contains('collapsed');
+    const content = logsWrapper.querySelector('.logs-content');
+    
+    if (isCollapsed) {
+        // Expand
+        logsWrapper.classList.remove('collapsed');
+        monthHeaderContainer.classList.remove('collapsed');
+        // Set the height to the content height
+        logsWrapper.style.height = content.offsetHeight + 'px';
+    } else {
+        // Collapse
+        // First set the height explicitly
+        logsWrapper.style.height = logsWrapper.offsetHeight + 'px';
+        // Force a reflow
+        logsWrapper.offsetHeight;
+        // Add collapsed class and set height to 0
+        logsWrapper.classList.add('collapsed');
+        monthHeaderContainer.classList.add('collapsed');
+        logsWrapper.style.height = '0';
+    }
 }
 
 // Set a fixed end date - 90 days from February 15, 2024

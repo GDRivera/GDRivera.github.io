@@ -383,7 +383,7 @@ body {
 }
 /* Add these styles at the end of your CSS file */
 .logs-container {
-    position: relative; /* Changed from fixed to relative */
+    position: relative;
     width: 90%;
     max-width: 400px;
     max-height: 300px;
@@ -396,30 +396,55 @@ body {
     color: #E2C285;
     font-size: 0.9rem;
     z-index: 1000;
-    scrollbar-width: thin;
-    scrollbar-color: #8E793E rgba(0, 0, 0, 0.3);
-    transition: height 0.2s ease-out;
-    will-change: height;
-}
-
-.logs-container::-webkit-scrollbar {
-    width: 8px;
-}
-
-.logs-container::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.3);
-}
-
-.logs-container::-webkit-scrollbar-thumb {
-    background-color: #8E793E;
-    border-radius: 4px;
 }
 
 .log-month-group {
     margin-bottom: 15px;
     border-bottom: 1px solid rgba(142, 121, 62, 0.3);
     padding-bottom: 10px;
-    transition: margin 0.2s ease-out, padding 0.2s ease-out;
+}
+
+.logs-wrapper {
+    overflow: hidden;
+    transition: height 0.3s ease;
+    height: auto;
+}
+
+.logs-wrapper.collapsed {
+    height: 0;
+}
+
+.logs-content {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.logs-wrapper.collapsed .logs-content {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.log-month-header {
+    cursor: pointer;
+    padding: 5px 0;
+    user-select: none;
+}
+
+.dropdown-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.log-month-header.collapsed .dropdown-arrow {
+    transform: rotate(-90deg);
+}
+
+.log-month-group {
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(142, 121, 62, 0.3);
+    padding-bottom: 10px;
+    position: relative;
 }
 
 .log-month-group:last-child {
@@ -462,53 +487,40 @@ body {
 }
 
 .logs-wrapper {
-    height: auto;
+    position: relative;
     opacity: 1;
+    max-height: 1000px;
     transform-origin: top;
-    transform: scaleY(1);
-    transition: transform 0.2s ease-out, opacity 0.2s ease-out, margin 0.2s ease-out, padding 0.2s ease-out;
-    will-change: transform, opacity;
-    margin-bottom: 10px;
-    padding: 5px 0;
+    transition: all 0.3s ease-out;
+    overflow: hidden;
+    transform: translateY(0) scaleY(1);
 }
 
 .logs-wrapper.collapsed {
-    height: 0;
+    max-height: 0;
     opacity: 0;
-    transform: scaleY(0);
     margin: 0;
     padding: 0;
+    transform: translateY(-10px) scaleY(0.95);
 }
 
-.log-month-header.collapsed {
-    margin-bottom: 5px;
-    border-bottom-color: rgba(142, 121, 62, 0.3);
+/* Match the exact same timing for child elements */
+.logs-wrapper > div {
+    transition: all 0.3s ease-out;
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Hover effect for the header */
-.log-month-header:hover .dropdown-arrow {
-    color: #E2C285;
+.logs-wrapper.collapsed > div {
+    opacity: 0;
+    transform: translateY(-10px);
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .log-month-header {
-        font-size: 1rem;
-    }
-    
-    .dropdown-arrow {
-        font-size: 0.7em;
-    }
-}
-
-@media (max-width: 480px) {
-    .log-month-header {
-        font-size: 0.9rem;
-    }
-    
-    .dropdown-arrow {
-        font-size: 0.6em;
-    }
+.log-month-group {
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(142, 121, 62, 0.3);
+    padding-bottom: 10px;
+    position: relative;
 }
 
 .log-entry {
@@ -517,6 +529,7 @@ body {
     word-wrap: break-word;
     white-space: normal;
     transition: background-color 0.2s ease;
+    position: relative;
 }
 
 .log-entry:hover {

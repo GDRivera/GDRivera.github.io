@@ -1,55 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>90 Days</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏰</text></svg>">
-    <link rel="stylesheet" href="styles.css">
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏰</text></svg>"
+    />
+    <link rel="stylesheet" href="styles.css" />
     <script src="typing-sound.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="content-wrapper">
-        <div class="bonfire-section">
-            <div class="bonfire-container">
-                <img src="darksoulsbonfire.gif" alt="Dark Souls Bonfire">
-            </div>
-            <!-- Moved button here, under the bonfire image -->
-            <button id="bonfireButton" class="bonfire-button">Click to rest at bonfire...</button>
+      <div class="bonfire-section">
+        <div class="bonfire-container">
+          <img src="darksoulsbonfire.gif" alt="Dark Souls Bonfire" />
         </div>
-        <div class="countdown">
-            <div class="time-segment">
-                <div class="time-value" id="days">
-                    <span id="days-tens">9</span><span id="days-ones">0</span>
-                </div>
-            </div>
-            <div class="time-segment">
-                <div class="time-value" id="hours">
-                    <span id="hours-tens">0</span><span id="hours-ones">0</span>
-                </div>
-            </div>
-            <div class="time-segment">
-                <div class="time-value" id="minutes">
-                    <span id="minutes-tens">0</span><span id="minutes-ones">0</span>
-                </div>
-            </div>
-            <div class="time-segment">
-                <div class="time-value" id="seconds">
-                    <span id="seconds-tens">0</span><span id="seconds-ones">0</span>
-                </div>
-            </div>
+        <button id="bonfireButton" class="bonfire-button">
+          Click to rest at bonfire...
+        </button>
+      </div>
+      <div class="countdown">
+        <div class="time-segment">
+          <div class="time-value" id="days">
+            <span id="days-tens">9</span><span id="days-ones">0</span>
+          </div>
         </div>
-        <div class="quote-container">
-            <div class="quote">
-                <span class="quote-text">You are filled with determination</span>
-                <span class="quote-animated">You are filled with determination</span>
-                <span class="dot">.</span>
-            </div>
+        <div class="time-segment">
+          <div class="time-value" id="hours">
+            <span id="hours-tens">0</span><span id="hours-ones">0</span>
+          </div>
         </div>
-        <div class="logs-container" id="logsContainer">
-            <!-- Logs will be inserted here -->
+        <div class="time-segment">
+          <div class="time-value" id="minutes">
+            <span id="minutes-tens">0</span><span id="minutes-ones">0</span>
+          </div>
         </div>
+        <div class="time-segment">
+          <div class="time-value" id="seconds">
+            <span id="seconds-tens">0</span><span id="seconds-ones">0</span>
+          </div>
+        </div>
+      </div>
+      <div class="quote-container">
+        <div class="quote">
+          <span class="quote-text">You are filled with determination</span>
+          <span class="quote-animated">You are filled with determination</span>
+          <span class="dot">.</span>
+        </div>
+      </div>
+      <div class="logs-container">
+        <!-- Each month group will be dynamically added here by JavaScript -->
+      </div>
     </div>
-</body>
-<script src="main.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>
