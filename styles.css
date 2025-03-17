@@ -386,8 +386,6 @@ body {
     position: relative;
     width: 90%;
     max-width: 400px;
-    max-height: 300px;
-    overflow-y: auto;
     background: rgba(0, 0, 0, 0.8);
     border: 1px solid #8E793E;
     padding: 15px;
@@ -396,6 +394,7 @@ body {
     color: #E2C285;
     font-size: 0.9rem;
     z-index: 1000;
+    margin: 0 auto; /* Center the container */
 }
 
 .log-month-group {
@@ -552,7 +551,7 @@ body {
 /* Responsive styles for logs */
 @media (max-width: 768px) {
     .logs-container {
-        max-width: 350px;
+        width: 90%;
         font-size: 0.85rem;
     }
     
@@ -563,8 +562,7 @@ body {
 
 @media (max-width: 480px) {
     .logs-container {
-        max-width: 300px;
-        max-height: 250px;
+        width: 95%;
         padding: 10px;
         font-size: 0.8rem;
     }
@@ -580,9 +578,8 @@ body {
 
 @media (max-width: 350px) {
     .logs-container {
-        max-width: 280px;
-        max-height: 200px;
-        padding: 8px;
+        width: 90%;
+        font-size: 0.8rem;
     }
     
     .log-month-group {
