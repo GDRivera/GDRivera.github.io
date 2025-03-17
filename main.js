@@ -1,8 +1,6 @@
 
 const logs = [
-    { date: '2025-03-16', message: 'This is a test log for today.' },
-    { date: '2025-03-16', message: 'This is a test log for today.' },
-    { date: '2025-03-16', message: 'This is a test log for today.' },
+    { date: '2025-03-16', message: 'It\'s a win today.' },
     // Add more logs as needed
 ];
 
