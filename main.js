@@ -1,6 +1,7 @@
 
 const logs = [
     { date: '2025-03-16', message: 'It\'s a win today.' },
+    { date: '2025-03-17', message: 'It\'s a win today. Walked for 30 mins.' },
     // Add more logs as needed
 ];
 
