@@ -529,6 +529,10 @@ body {
     white-space: normal;
     transition: background-color 0.2s ease;
     position: relative;
+    display: grid;
+    grid-template-columns: 40px 1fr; /* Fixed width for date, flexible for message */
+    gap: 8px; /* Space between date and message */
+    align-items: start; /* Align items to top */
 }
 
 .log-entry:hover {
@@ -537,15 +541,14 @@ body {
 
 .log-date {
     color: #8E793E;
-    margin-right: 8px;
     font-size: 0.8rem;
+    white-space: nowrap; /* Prevent date from wrapping */
 }
 
 .log-message {
     color: #E2C285;
-    display: inline-block; /* Makes the text wrap properly */
     word-break: break-word; /* Breaks long words if necessary */
-    max-width: 100%; /* Ensures text stays within container */
+    line-height: 1.4; /* Improved readability for wrapped text */
 }
 
 /* Responsive styles for logs */
@@ -698,5 +701,12 @@ body {
         padding: 8px 15px;
         letter-spacing: 1px;
         width: 90%;
+    }
+}
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .log-entry {
+        grid-template-columns: 30px 1fr; /* Smaller date column on mobile */
+        gap: 6px;
     }
 }
