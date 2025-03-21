@@ -3,7 +3,8 @@ const logs = [
     { date: '2025-03-16', message: 'It\'s a win today.' },
     { date: '2025-03-17', message: 'It\'s a win today. Walked for 30 mins.' },
     { date: '2025-03-18', message: 'Another win today. No exercise.' },
-    { date: '2025-03-19', message: 'GGs today. Ran 1 mile and walked (25 mins).'}
+    { date: '2025-03-19', message: 'GGs today. Ran 1 mile and walked (25 mins).'},
+    { date: '2025-03-19', message: 'Ran 1.14 miles in 14 min. Walked 10 mins. Y otro día donde el diablo pierde, prrrraaa.'}
     // Add more logs as needed
 ];
 
