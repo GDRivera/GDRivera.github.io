@@ -4,7 +4,9 @@ const logs = [
     { date: '2025-03-17', message: 'It\'s a win today. Walked for 30 mins.' },
     { date: '2025-03-18', message: 'Another win today. No exercise.' },
     { date: '2025-03-19', message: 'GGs today. Ran 1 mile and walked (25 mins).'},
-    { date: '2025-03-20', message: 'Ran 1.14 miles in 14 min. Walked 10 mins. Y otro día donde el diablo pierde, prrrraaa.'}
+    { date: '2025-03-20', message: 'Ran 1.14 miles in 14 min. Walked 10 mins. Y otro día donde el diablo pierde, prrrraaa.'},
+    { date: '2025-03-21', message: 'GGs. No exercise.'},
+    { date: '2025-03-22', message: 'Today is a sad day, but we move forward. At least I got to walk for an hour (2.40 miles which is not bad).'},
     // Add more logs as needed
 ];
 
@@ -120,7 +122,7 @@ function toggleLogs(monthHeaderContainer, logsWrapper) {
 
 // Set a fixed end date - 90 days from February 15, 2024
 const getEndDate = () => {
-    const startDate = new Date('2025-03-16').getTime();
+    const startDate = new Date('2025-03-22').getTime();
     const endDate = startDate + (90 * 24 * 60 * 60 * 1000);
     return endDate;
 };
