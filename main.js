@@ -9,7 +9,7 @@ const logs = [
     { date: '2025-03-22', message: 'Today is a sad day, but we move forward. At least I got to walk for an hour (2.40 miles which is not bad).'},
     { date: '2025-03-23', message: '🥲. another hour of walking.'},
     { date: '2025-03-24', message: 'GGs. another hour of walking (2.50 miles).'},
-    { date: '2025-03-24', message: 'pretau. 54 mins walking.'},
+    { date: '2025-03-25', message: 'pretau. 54 mins walking.'},
     // Add more logs as needed
 ];
 
