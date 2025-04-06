@@ -138,7 +138,7 @@ function toggleLogs(monthHeaderContainer, logsWrapper) {
 
 // Set a fixed end date - 90 days from February 15, 2024
 const getEndDate = () => {
-    const startDate = new Date('2025-03-25').getTime();
+    const startDate = new Date('2025-04-04').getTime();
     const endDate = startDate + (90 * 24 * 60 * 60 * 1000);
     return endDate;
 };
